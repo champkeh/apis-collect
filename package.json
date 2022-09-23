@@ -1,0 +1,15 @@
+{
+  "name": "apis-collect",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:champkeh/apis-collect.git",
+  "author": "champkeh <champion.ge@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node 微信读书/api.js"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.2"
+  }
+}
