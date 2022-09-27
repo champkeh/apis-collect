@@ -414,3 +414,42 @@ Content-Type: application/json
 
 `skey`参数有超时时间，超时后需要重新请求微信接口进行刷新，暂时还没有分析如何进行刷新。
 
+## 超时登录
+
+### 接口地址
+
+```
+https://i.weread.qq.com/login
+```
+
+### 调用示例
+
+```http request
+POST /login HTTP/1.1
+Host: i.weread.qq.com
+Content-Type: application/json
+
+{
+  "random": 1481696734,
+  "deviceId": "xxx",
+  "refCgi": "",
+  "signature": "xxx",
+  "refreshToken": "xxx",
+  "wxToken": 1,
+  "timestamp": 1664275752,
+  "inBackground": 0,
+  "deviceToken": "xxx"
+}
+```
+
+### 返回示例
+
+```json
+{
+  "errcode": -2013,
+  "errmsg": "微信登录授权已过期，继续购买需跳转到微信重新登录",
+  "vid": 86604721,
+  "accessToken": "zEGrRJwr",
+  "alertType": 1
+}
+```
