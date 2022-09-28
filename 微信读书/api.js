@@ -6,10 +6,8 @@ dotenv.config()
 let skey
 
 const vid = process.env.WEREAD_VID
-const deviceId = process.env.WEREAD_DEVICE_ID
-const deviceToken = process.env.WEREAD_DEVICE_TOKEN
 const refreshToken = process.env.WEREAD_REFRESH_TOKEN
-const signature = process.env.WEREAD_SIGNATURE
+
 const pf = 'weread_wx-2001-iap-2001-iphone'
 const exchangeUrl = 'https://i.weread.qq.com/weekly/exchange'
 const loginUrl = 'https://i.weread.qq.com/login'
@@ -42,12 +40,16 @@ function awardFilter(data) {
         ...data.readtimeAwards.map(item => ({
             id: item.awardLevelId,
             status: item.awardStatus,
+            statusDesc: item.awardStatusDesc,
+            name: `${item.awardLevelDesc}${item.awardChoicesDesc}`.replace(/\s/g, ''),
         }))
     )
     awards.push(
         ...data.readdayAwards.map(item => ({
             id: item.awardLevelId,
             status: item.awardStatus,
+            statusDesc: item.awardStatusDesc,
+            name: `${item.awardLevelDesc}${item.awardChoicesDesc}`.replace(/\s/g, ''),
         }))
     )
     return awards
@@ -106,13 +108,9 @@ async function exchangeAllAwards(ids) {
 async function login() {
     return new Promise((resolve, reject) => {
         axios.post(loginUrl, {
-            deviceId,
-            deviceToken,
+            deviceId: "1",
             refCgi: "",
-            signature,
             refreshToken,
-            wxToken: 1,
-            inBackground: 1,
         }).catch(err => {
             if (err.response && err.response.data && err.response.data.accessToken) {
                 resolve(err.response.data.accessToken)
@@ -126,6 +124,7 @@ async function login() {
 async function run() {
     try {
         skey = await login()
+        console.log(`本次使用的skey: ${skey}`)
         let awards = await queryAllAwards()
         console.log('兑换前：')
         console.log(awards)

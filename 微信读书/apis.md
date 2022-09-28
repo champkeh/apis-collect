@@ -442,7 +442,24 @@ Content-Type: application/json
 }
 ```
 
-### 返回示例
+### 参数说明
+
+| 参数名          | 参数说明         | 是否必填        | 是否参与鉴权 |
+|--------------|--------------|-------------|--------|
+| refreshToken | 刷新skey的token | true        | true   |
+| deviceId     | 设备id         | true (不可为空) | false  |
+| refCgi       | 未知           | true (可以为空) | false  |
+| random       | 随机数          | false       | false  |
+| signature    | 签名           | false       | false  |
+| wxToken      | 未知           | false       | false  |
+| timestamp    | 时间戳          | false       | false  |
+| inBackground | 未知           | false       | false  |
+| deviceToken  | 设备token      | false       | false  |
+
+
+### 响应结果
+
+> 虽然请求结果状态是401，并且有错误码，但是不影响`accessToken`的正常使用。
 
 ```json
 {
@@ -453,3 +470,5 @@ Content-Type: application/json
   "alertType": 1
 }
 ```
+
+`accessToken`就是我们在兑换时用到的`skey`参数。
