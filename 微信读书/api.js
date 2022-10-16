@@ -111,6 +111,8 @@ async function login() {
             deviceId: "1",
             refCgi: "",
             refreshToken,
+        }).then(resp => {
+            resolve(resp.data.skey)
         }).catch(err => {
             if (err.response && err.response.data && err.response.data.accessToken) {
                 resolve(err.response.data.accessToken)

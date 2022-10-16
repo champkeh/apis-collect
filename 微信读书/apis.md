@@ -459,6 +459,25 @@ Content-Type: application/json
 
 ### 响应结果
 
+#### 正常的请求结果
+
+```json
+{
+  "vid": 86604721,
+  "skey": "",
+  "accessToken": "",
+  "openId": "",
+  "wxAccessToken": "",
+  "user": {
+    "name": "champ",
+    "avatar": ""
+  },
+  "firstLogin": 0
+}
+```
+
+#### 非正常的请求结果
+
 > 虽然请求结果状态是401，并且有错误码，但是不影响`accessToken`的正常使用。
 > 目前不确定`refreshToken`的有效期是多少。
 
